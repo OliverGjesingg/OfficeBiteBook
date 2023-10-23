@@ -2,7 +2,7 @@ using backend.DatabaseRepository;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MenuTypesController
+namespace MenuTypeController
 {
     [ApiController]
     [Route("[controller]")]
