@@ -5,7 +5,7 @@ namespace backend.DatabaseRepository
     public class MenuTypeDB
     {
         // Get All
-        public static List<MenuType> GetAllMenuTypes() 
+        public static List<MenuType> GetAllMenuTypes()
         {
             List<MenuType> list = new List<MenuType>();
 

@@ -5,7 +5,7 @@ namespace backend.DatabaseRepository
     public class DishDB
     {
         // Get All
-        public static List<Dish> GetAllDishes() 
+        public static List<Dish> GetAllDishes()
         {
             List<Dish> list = new List<Dish>();
 

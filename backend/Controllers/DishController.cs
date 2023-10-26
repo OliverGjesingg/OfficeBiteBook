@@ -2,19 +2,12 @@ using backend.DatabaseRepository;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DishesController
+namespace DishController
 {
     [ApiController]
     [Route("[controller]")]
     public class DishController : ControllerBase
     {
-        private readonly ILogger<DishController> _logger;
-
-        public DishController(ILogger<DishController> logger)
-        {
-            _logger = logger;
-        }
-
         // Get All
         [HttpGet]
         [Route("GetAllDishes")]
@@ -26,9 +19,9 @@ namespace DishesController
         // Get Single
         [HttpGet]
         [Route("GetDishById")]
-        public ActionResult<Dish> GetDishById(int GetDishId)
+        public ActionResult<Dish> GetDishById(int DishId)
         {
-            return DishDB.GetDishById(GetDishId);
+            return DishDB.GetDishById(DishId);
         }
 
         // Add
@@ -42,17 +35,17 @@ namespace DishesController
         // Delete
         [HttpDelete]
         [Route("DeleteDishById")]
-        public ActionResult<Dish> DeleteDishById(int DeleteDishId)
+        public ActionResult<Dish> DeleteDishById(int DishId)
         {
-            return DishDB.DeleteDishById(DeleteDishId);
+            return DishDB.DeleteDishById(DishId);
         }
 
         // Edit
         [HttpPut]
         [Route("EditDishById")]
-        public ActionResult<Dish> EditDishById(int EditDishId)
+        public ActionResult<Dish> EditDishById(int DishId)
         {
-            return DishDB.EditDishById(EditDishId);
+            return DishDB.EditDishById(DishId);
         }
     }
 }

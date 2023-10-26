@@ -5,7 +5,7 @@ namespace backend.DatabaseRepository
     public class UserDB
     {
         // Get All
-        public static List<User> GetAllUsers() 
+        public static List<User> GetAllUsers()
         {
             List<User> list = new List<User>();
 
@@ -32,7 +32,7 @@ namespace backend.DatabaseRepository
             user3.UserName = "Dennis Reynolds";
             user3.UserEmail = "the-implication@email.com";
             user3.UserPhone = "+40 6666 6666";
-            user2.UserBirthday = "16-06-1966";
+            user3.UserBirthday = "16-06-1966";
             user3.UserImage = "url_to_user_profile_picture";
             list.Add(user3);
 

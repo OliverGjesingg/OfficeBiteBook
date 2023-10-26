@@ -8,13 +8,6 @@ namespace MenuTypeController
     [Route("[controller]")]
     public class MenuTypeController : ControllerBase
     {
-        private readonly ILogger<MenuTypeController> _logger;
-
-        public MenuTypeController(ILogger<MenuTypeController> logger)
-        {
-            _logger = logger;
-        }
-
         // Get All
         [HttpGet]
         [Route("GetAllMenuTypes")]
@@ -26,9 +19,9 @@ namespace MenuTypeController
         // Get Single
         [HttpGet]
         [Route("GetMenuTypeById")]
-        public ActionResult<MenuType> GetMenuTypeById(int GetMenuTypeId)
+        public ActionResult<MenuType> GetMenuTypeById(int MenuTypeId)
         {
-            return MenuTypeDB.GetMenuTypeById(GetMenuTypeId);
+            return MenuTypeDB.GetMenuTypeById(MenuTypeId);
         }
 
         // Add
@@ -42,17 +35,17 @@ namespace MenuTypeController
         // Delete
         [HttpDelete]
         [Route("DeleteMenuTypeById")]
-        public ActionResult<MenuType> DeleteMenuTypeById(int DeleteMenuTypeId)
+        public ActionResult<MenuType> DeleteMenuTypeById(int MenuTypeId)
         {
-            return MenuTypeDB.DeleteMenuTypeById(DeleteMenuTypeId);
+            return MenuTypeDB.DeleteMenuTypeById(MenuTypeId);
         }
 
         // Edit
         [HttpPut]
         [Route("EditMenuTypeById")]
-        public ActionResult<MenuType> EditMenuTypeById(int EditMenuTypeId)
+        public ActionResult<MenuType> EditMenuTypeById(int MenuTypeId)
         {
-            return MenuTypeDB.EditMenuTypeById(EditMenuTypeId);
+            return MenuTypeDB.EditMenuTypeById(MenuTypeId);
         }
     }
 }
