@@ -11,17 +11,17 @@ namespace backend.DatabaseRepository
 
             Location location1 = new Location();
             location1.LocationId = 1;
-            location1.LocationName = "Aarhus Street Food";
+            location1.LocationName = "Aarhus";
             list.Add(location1);
 
             Location location2 = new Location();
             location2.LocationId = 2;
-            location2.LocationName = "Aarhus Kantine";
+            location2.LocationName = "København";
             list.Add(location2);
 
             Location location3 = new Location();
             location3.LocationId = 3;
-            location3.LocationName = "Den Gode Gamle Bager";
+            location3.LocationName = "Silkeborg";
             list.Add(location3);
 
             return list;
