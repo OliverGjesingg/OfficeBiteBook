@@ -1,5 +1,6 @@
 ﻿using backend.Models;
 using backend.DatabaseRepository;
+using System.Data;
 
 namespace backend.DatabaseRepository
 {
@@ -14,26 +15,17 @@ namespace backend.DatabaseRepository
 
             if (menu != null && user != null && menu.Count > 0 && user.Count > 0)
             {
-                MenuUser menuUser1 = new MenuUser();
-                menuUser1.MenuId = menu[0].MenuId;
-                menuUser1.MenuTitle = menu[0].MenuTitle;
-                menuUser1.UserId = user[0].UserId;
-                menuUser1.UserName = user[0].UserName;
-                list.Add(menuUser1);
-
-                MenuUser menuUser2 = new MenuUser();
-                menuUser2.MenuId = menu[1].MenuId;
-                menuUser2.MenuTitle = menu[1].MenuTitle;
-                menuUser2.UserId = user[1].UserId;
-                menuUser2.UserName = user[1].UserName;
-                list.Add(menuUser2);
-
-                MenuUser menuUser3 = new MenuUser();
-                menuUser3.MenuId = menu[2].MenuId;
-                menuUser3.MenuTitle = menu[2].MenuTitle;
-                menuUser3.UserId = user[2].UserId;
-                menuUser3.UserName = user[2].UserName;
-                list.Add(menuUser3);
+                for (int i = 0; i < menu.Count && i < user.Count; i++)
+                {
+                    MenuUser menuUser = new MenuUser
+                    {
+                        MenuId = menu[i].MenuId,
+                        MenuTitle = menu[i].MenuTitle,
+                        UserId = user[i].UserId,
+                        UserName = user[i].UserName
+                    };
+                    list.Add(menuUser);
+                }
             }
 
             return list;

@@ -8,6 +8,7 @@ namespace backend.DatabaseRepository
         public static List<User> GetAllUsers()
         {
             List<User> list = new List<User>();
+            List<Location> location = LocationDB.GetAllLocations();
 
             User user1 = new User();
             user1.UserId = 1;

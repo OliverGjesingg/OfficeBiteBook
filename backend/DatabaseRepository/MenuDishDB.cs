@@ -14,26 +14,17 @@ namespace backend.DatabaseRepository
 
             if (menu != null && dish != null && menu.Count > 0 && dish.Count > 0)
             {
-                MenuDish menuDish1 = new MenuDish();
-                menuDish1.MenuId = menu[0].MenuId;
-                menuDish1.MenuTitle = menu[0].MenuTitle;
-                menuDish1.DishId = dish[0].DishId;
-                menuDish1.DishTitle = dish[0].DishTitle;
-                list.Add(menuDish1);
-
-                MenuDish menuDish2 = new MenuDish();
-                menuDish2.MenuId = menu[1].MenuId;
-                menuDish2.MenuTitle = menu[1].MenuTitle;
-                menuDish2.DishId = dish[1].DishId;
-                menuDish2.DishTitle = dish[1].DishTitle;
-                list.Add(menuDish2);
-
-                MenuDish menuDish3 = new MenuDish();
-                menuDish3.MenuId = menu[2].MenuId;
-                menuDish3.MenuTitle = menu[2].MenuTitle;
-                menuDish3.DishId = dish[2].DishId;
-                menuDish3.DishTitle = dish[2].DishTitle;
-                list.Add(menuDish3);
+                for (int i = 0; i < menu.Count && i < dish.Count; i++)
+                {
+                    MenuDish menuDish = new MenuDish
+                    {
+                        MenuId = menu[i].MenuId,
+                        MenuTitle = menu[i].MenuTitle,
+                        DishId = dish[i].DishId,
+                        DishTitle = dish[i].DishTitle
+                    };
+                    list.Add(menuDish);
+                }
             }
 
             return list;

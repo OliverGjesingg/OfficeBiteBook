@@ -16,30 +16,22 @@ namespace backend.DatabaseRepository
 
             if (user != null && role != null && user.Count > 0 && role.Count > 0)
             {
-                UserRole userRole1 = new UserRole();
-                userRole1.UserId = user[0].UserId;
-                userRole1.RoleId = role[0].RoleId;
-                userRole1.UserName = user[0].UserName;
-                userRole1.RoleName = role[0].RoleName;
-                list.Add(userRole1);
-
-                UserRole userRole2 = new UserRole();
-                userRole2.UserId = user[1].UserId;
-                userRole2.RoleId = role[1].RoleId;
-                userRole2.UserName = user[1].UserName;
-                userRole2.RoleName = role[1].RoleName;
-                list.Add(userRole2);
-
-                UserRole userRole3 = new UserRole();
-                userRole3.UserId = user[2].UserId;
-                userRole3.RoleId = role[2].RoleId;
-                userRole3.UserName = user[2].UserName;
-                userRole3.RoleName = role[2].RoleName;
-                list.Add(userRole3);
+                /* Instead of writing each of our users manually, one for one, we can rather, 
+                and more simply, loop all that exist out from the UserDB & RoleDB.
+                This also make it easier to automatically retrieve new users & roles if added in the future. */
+                for (int i = 0; i < user.Count && i < role.Count; i++)
+                {
+                    UserRole userRole = new UserRole
+                    {
+                        UserId = user[i].UserId,
+                        UserName = user[i].UserName,
+                        RoleId = role[i].RoleId,
+                        RoleName = role[i].RoleName
+                    };
+                    list.Add(userRole);
+                }
             }
-
             return list;
-
         }
 
         // Get Single
