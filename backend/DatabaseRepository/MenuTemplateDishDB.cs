@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using System.Data;
 
 namespace backend.DatabaseRepository
 {
@@ -8,27 +9,21 @@ namespace backend.DatabaseRepository
         public static List<MenuTemplateDish> GetAllMenuTemplateDishes()
         {
             List<MenuTemplateDish> list = new List<MenuTemplateDish>();
+            List<MenuTemplate> menuTemplate = MenuTemplateDB.GetAllMenuTemplates();
+            List<Dish> dish = DishDB.GetAllDishes();
 
-            MenuTemplateDish menuTemplateDish1 = new MenuTemplateDish();
-            menuTemplateDish1.TemplateId = 1;
-            menuTemplateDish1.TemplateTitle = "The Morning Grand Feast";
-            menuTemplateDish1.DishId = 1;
-            menuTemplateDish1.DishTitle = "Eggs & Bacon";
-            list.Add(menuTemplateDish1);
-
-            MenuTemplateDish menuTemplateDish2 = new MenuTemplateDish();
-            menuTemplateDish2.TemplateId = 2;
-            menuTemplateDish2.TemplateTitle = "The Lunch Devour";
-            menuTemplateDish2.DishId = 2;
-            menuTemplateDish2.DishTitle = "So much salad... and so much spaghetti!";
-            list.Add(menuTemplateDish2);
-
-            MenuTemplateDish menuTemplateDish3 = new MenuTemplateDish();
-            menuTemplateDish3.TemplateId = 3;
-            menuTemplateDish3.TemplateTitle = "The Lunch Devour";
-            menuTemplateDish3.DishId = 3;
-            menuTemplateDish3.DishTitle = "So much salad... and so much spaghetti!";
-            list.Add(menuTemplateDish3);
+            if (menuTemplate != null && dish != null && menuTemplate.Count > 0 && dish.Count > 0)
+            {
+                for (int i = 0; i < menuTemplate.Count && i < dish.Count; i++)
+                {
+                    MenuTemplateDish menuTemplateDish = new MenuTemplateDish
+                    {
+                        TemplateId = menuTemplate[i].TemplateId,
+                        DishId = dish[i].DishId,
+                    };
+                    list.Add(menuTemplateDish);
+                }
+            }
 
             return list;
         }

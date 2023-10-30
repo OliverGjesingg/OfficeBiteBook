@@ -7,7 +7,7 @@
         public string? UserEmail { get; set; }
         public string? UserPhone { get; set; }
         public string? UserBirthday { get; set; }
-        public int? UserLocationId { get; set; }
+        public int? LocationId { get; set; }
         public string? UserImage { get; set; }
     }
 }
