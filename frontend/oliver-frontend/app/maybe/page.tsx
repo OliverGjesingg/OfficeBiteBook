@@ -4,30 +4,28 @@ import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import Header from '@/components/Header'
 
-export default function Login({
+export default async function Login({
   searchParams,
 }: {
   searchParams: { message: string }
 }) {
-  const signIn = async (formData: FormData) => {
-    'use server'
-
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
+    
     const cookieStore = cookies()
     const supabase = createClient(cookieStore)
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
 
-    if (error) {
-      return redirect('/login?message=Could not authenticate user')
-    }
+    //this gets the user from authentication
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+    
+    //get the userid
+    const userId = user?.id;
 
-    return redirect('/')
-  }
+    //gets the user in the table
+    const { data: users } = await supabase.from("users").select().eq('user_id', userId).single();
+
+
 
   return (
     <div className="flex-1  flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
@@ -55,26 +53,15 @@ export default function Login({
       <h1 className='text-4xl mt-5'>Sign in</h1>
       <form
         className="animate-in flex-1 flex flex-col w-full gap-2"
-        action={signIn}
+        action={update}
       >
-        <label className="text-md" htmlFor="email">
-          Email
+        <label className="text-md" htmlFor="name">
+          Navn
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6 border-black"
-          name="email"
-          placeholder="you@example.com"
-          required
-        />
-
-        <label className="text-md" htmlFor="password">
-          Password
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6 border-black"
-          type="password"
-          name="password"
-          placeholder="••••••••"
+          name="name"
+          defaultValue={users?.user_name}
           required
         />
         <button className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2">
@@ -89,3 +76,33 @@ export default function Login({
     </div>
   )
 }
+
+
+  const update = async (formData: FormData) => {
+    'use server'
+
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+
+        //this gets the user from authentication
+        const {
+          data: { user },
+      } = await supabase.auth.getUser();
+      
+      //get the userid
+      const userId = user?.id;
+
+    const Name = formData.get('name') as string
+    
+    const { error} = await supabase.from('users').update({ user_name: Name}).eq('user_id', userId);
+    // const { error } = await supabase.auth.signInWithPassword({
+    //   email,
+    //   password,
+    // })
+
+    if (error) {
+      return redirect('/login?message=Could not authenticate user')
+    }
+
+    return redirect('')
+  }
