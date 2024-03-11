@@ -36,21 +36,12 @@ return(
                 <img src={publicURL} className="w-25"/>
                 {/* <h1>{dish.dish_id}</h1>
                 <h1>{dish.dish_title}</h1> */}
-                <div className="pl-5 flex-col">
+                <div className="pl-5 flex-col max-w-1/2">
                 <h1 className="text-2xl mb-5">{dish.dish_title}</h1>
                 <p>{dish.dish_description}</p>
                 </div>
             </div>
         ))}
-        <div className="flex flex-row mt-2">
-                <img src="" className="w-25"/>
-                {/* <h1>{dish.dish_id}</h1>
-                <h1>{dish.dish_title}</h1> */}
-                <div className="pl-5 flex-col">
-                <h1 className="text-2xl mb-5">Lasagne</h1>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
-                </div>
-            </div>
     </div>
 )
 }

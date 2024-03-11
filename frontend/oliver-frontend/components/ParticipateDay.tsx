@@ -7,12 +7,15 @@ import { cookies } from "next/headers";
 import {supabase} from '@/components/SupabaseClient'
 import { motion } from 'framer-motion';
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
 interface MenuProps {
   menu: {
     menu_id: any;
+    menu_date: any;
   };
   userId: {
     userId: any;
@@ -32,6 +35,9 @@ export default function ParticipateDay({ menu, userId }: MenuProps) {
 // const { data: dishData, error: dishError } = await supabase.from("menu_user").select().eq("user_id", userId.userId);
 //       console.log(dishData)
 //     }
+
+const notify = (message : string) => toast(message, { autoClose: 2000 });
+
 const handleAccept = async () => {
     try {
       if (supabase) {
@@ -40,7 +46,7 @@ const handleAccept = async () => {
             menu_id: menu.menu_id, user_id: userId.userId
           },
         ]);
-
+        notify("Du deltager den " + menu.menu_date)
         if (error) throw error;
         // console.log("Data submitted successfully", data);
       } else {
@@ -57,6 +63,7 @@ const handleAccept = async () => {
         const { error } = await supabase.from("menu_user").delete().eq('menu_id', menu.menu_id).eq('user_id', userId.userId);
         if (error) throw error;
         // console.log("Data deleted successfully");
+        notify("Du deltager ikke den " + menu.menu_date);
       } else {
         console.error("Supabase client is null");
       }
@@ -117,29 +124,19 @@ const handleAccept = async () => {
       {/* {menu.menu_id && userId.userId = } */}
       {/*<button id="button" onClick={handleDeny}>deltag ikke</button> */}
       {/* <button id="button" className="mr-5" onClick={handleAccept}>deltag</button> */}
+      <ToastContainer />
       <div className="flex flex-row cursor-pointer " onClick={handleToggle}>
-        <p className="mr-3">Deltag</p>
+        <p className="mr-3 text-sm sm:text-base">Deltag</p>
       <div
-        className={`flex h-6 w-12 cursor-pointer rounded-full ${toggle ? "justify-end bg-lime-400 ": "justify-start bg-zinc-400"} p-[2px]`}
+        className={`flex sm:h-6 sm:w-12 h-5 w-10 cursor-pointer rounded-full ${toggle ? "justify-end bg-lime-400 ": "justify-start bg-zinc-400"} p-[2px]`}
       >
         <motion.div
-          className={`h-5 w-5 rounded-full ${toggle ? "bg-lime-600" : "bg-zinc-700"}`}
+          className={`h-4 sm:h-5 sm:w-5 w-4 rounded-full ${toggle ? "bg-lime-600" : "bg-zinc-700"}`}
           layout
           transition={{ type: "spring", stiffness: 700, damping: 30 }}
         />
       </div>
     </div>
     </div>
-    // <div className="flex flex-row cursor-pointer " onClick={handleToggle}>
-    //   <div
-    //     className={`flex h-6 w-12 cursor-pointer rounded-full ${toggle ? "justify-end bg-lime-400 ": "justify-start bg-zinc-400"} p-[2px]`}
-    //   >
-    //     <motion.div
-    //       className={`h-5 w-5 rounded-full ${toggle ? "bg-lime-600" : "bg-zinc-700"}`}
-    //       layout
-    //       transition={{ type: "spring", stiffness: 700, damping: 30 }}
-    //     />
-    //   </div>
-    // </div>
   );
 }

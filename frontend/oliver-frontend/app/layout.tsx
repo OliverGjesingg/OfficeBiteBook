@@ -33,7 +33,7 @@ const supabase = createClient(cookieStore)
     <html lang="en" className={GeistSans.className}>
       
       <body>
-        <Header/>
+        {/* <Header/> */}
         <main className="min-h-screen flex flex-col items-center">
           {children}
         </main>

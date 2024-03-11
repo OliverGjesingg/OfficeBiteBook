@@ -40,7 +40,7 @@ export default async function AuthButton() {
       <Link href="/user">{users?.user_name}</Link>
       <img src={data?.publicUrl} className="w-14 rounded-lg"/>
       <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline">
+        <button className="bg-red-500 hover:bg-red-600 duration-150 text-white py-2 px-4 rounded-md no-underline">
           Logout
         </button>
       </form>

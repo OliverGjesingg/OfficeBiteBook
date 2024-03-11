@@ -2,6 +2,9 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Button from "./ParticipateDay";
 import Dish from "./Dish";
+import lasagna from "../lasagne.jpg"
+import Image from "next/image";
+
 
 interface MenuProps {
     menu: {
@@ -21,7 +24,11 @@ interface MenuProps {
     const {data: menudishs} = await supabase.from("menu_dish").select().eq("menu_id", menu.menu_id);
 
     let getDate = menu.menu_date ? menu.menu_date : ""; // set default value if undefined
-    let date = getDate.slice(8, 10);
+    let sliceDate = getDate.slice(5, 10);
+    // Parse the date string into a Date object
+    const date = new Date(sliceDate);
+    // Format the date as "day month year"
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}`;
 
     let getStartTime = menu.menu_start_time ? menu.menu_start_time : "";
     let startTime = getStartTime.slice(0, 5);
@@ -47,32 +54,24 @@ interface MenuProps {
       <div className="flex flex-row">
         
       <div className="flex flex-col">
-        <div className="flex flex-row">
-        <h1 className="mr-2">{DayName}</h1>
-        <h1 className="mr-2">{date}.</h1>
-        {/* <h1 className="mr-2">{menu.menu_title}</h1> */}
+        <div className="flex lg:flex-row text-sm sm:text-base sm:mt-0 mt-7">
+        <h1 className="mr-1">{DayName}</h1>
+        <h1 className="mr-2">{formattedDate}</h1>
         <h1 className="mr-2">{startTime} - {endTime}</h1>
         <h1>{menu.menu_title}</h1>
         </div>
-        {menudishs?.map((menudish) => (
-            <div key={menudish.menu_id}>
-                <Dish menudish={menudish}/>
-            </div>
-        ))}
         {dishData?.map((dish) => (
-            <div key={dish.dish_id} className="flex flex-row mt-2">
+            <div key={dish.dish_id} className="flex flex-col sm:flex-row mt-2">
                 {/* <img src={publicURL} className="w-25"/> */}
-                {/* <h1>{dish.dish_id}</h1>
-                <h1>{dish.dish_title}</h1> */}
-                <div className="pl-5 flex-col">
-                <h1 className="text-2xl mb-5">{dish.dish_title}</h1>
+                <Image className="w-1/2 sm:w-1/3 shrink-0" src={lasagna} alt="lasagna"/>
+
+                <div className="sm:pl-5 flex-col w-full">
+                <h1 className="text-2xl mb-1 ">{dish.dish_title}</h1>
                 <p>{dish.dish_description}</p>
                 </div>
             </div>
         ))}
         </div>
-        {/* <h1 className="mr-4">Deltag</h1> */}
-        {/* <Button/> */}
         </div>
     );
   }

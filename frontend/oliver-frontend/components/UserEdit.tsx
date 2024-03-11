@@ -51,7 +51,7 @@ export default async function UserEdit() {
 
 // const asdasdfa = document.getElementById("Name")
   return user ? (
-    <div className='flex flex-col'>
+    <div className='flex flex-col mt-20'>
       <form action={updateUser}>
         <label>Navn:</label>
         <br/>

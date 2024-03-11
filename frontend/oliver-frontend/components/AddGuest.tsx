@@ -11,7 +11,7 @@ interface Props {
   };
 }
 
-export default async function AddGuest({ userId }: Props) {
+export default function AddGuest({ userId }: Props) {
 
 
         
@@ -31,6 +31,8 @@ export default async function AddGuest({ userId }: Props) {
 
         if (error) throw error;
         console.log("Data submitted successfully", data);
+    location.reload()
+
       } else {
         console.error("Supabase client is null");
       }
@@ -41,12 +43,15 @@ export default async function AddGuest({ userId }: Props) {
   };
 
   return (
-    <div className='flex flex-col w-1/4'>
+    <div className='flex flex-col w-full'>
       <form action={handleAccept}>
       <input name='amount' type="number" className='rounded-md px-4 py-2 bg-inherit border mb-6 border-black' placeholder='Antal gæster'/>
       <input name="date" type='date' className='rounded-md px-4 py-2 bg-inherit border mb-6 border-black'/>
       <textarea name="description" className='rounded-md px-4 py-2 bg-inherit border mb-6 border-black h-24' placeholder='Er der nogle allergier eller mad diæter kokken skal være opmærksom om?'/>
-      <button  className='bg-green-600 p-1 text-zinc-50 rounded hover:bg-green-700 ease-out duration-300'>Tilføj gæst</button>
+      <div className='w-full text-center'>
+        <button  className='bg-green-600 p-1 text-zinc-50 rounded hover:bg-green-700 ease-out duration-300 w-1/2 '>Tilføj gæst</button>
+      </div>
+      
       </form>
       
     </div>

@@ -1,8 +1,6 @@
 import AuthButton from './AuthButton'
 import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
-import MenuButton from './MenuButton'
-
 
 export default function Header() {
   const cookieStore = cookies()
@@ -27,7 +25,6 @@ export default function Header() {
       <nav className="w-full flex border-b border-b-foreground/10 h-16">
         <div className="w-full max-w-4xl flex p-3 text-sm">
           {isSupabaseConnected && <AuthButton />}
-          {/* <MenuButton/> */}
         </div>
       </nav>
     </div>
